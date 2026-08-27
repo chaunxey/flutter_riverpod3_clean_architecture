@@ -1,73 +1,166 @@
-# flutter_riverpod_ca
+# README\.md
 
-A new Flutter project. mvvm + clean architecture + riverpod + dio 
+# flutter\_riverpod\_ca
 
-## Getting Started
+🔥 **Flutter 企业级模板 \| CleanArchitecture \+ MVVM \+ Riverpod \+ Dio**
 
+一套完整、规范、可直接上线的 Flutter 新项目架构模板，严格遵循 Clean Architecture 分层架构，搭配 Riverpod 最新代码生成状态管理，统一项目规范，告别混乱代码。
 
-# 状态管理使用riverpod https://riverpod.dev/docs/introduction/getting_started
+---
+
+## ✨ 技术栈清单
+
+- **状态管理**：flutter\_riverpod（代码生成模式）
+
+- **网络请求**：dio
+
+- **数据模型**：freezed \+ json\_serializable
+
+- **路由管理**：go\_router
+
+- **本地缓存**：shared\_preferences
+
+- **安全存储**：flutter\_secure\_storage
+
+- **工具拓展**：fpdart、equatable、package\_info\_plus
+
+- **辅助能力**：网络监听、外部链接跳转、资源自动生成
+
+---
+
+## 📦 完整依赖安装命令
+
+### 1\. 状态管理 Riverpod
+
+官方代码生成版本，配合 lint 规范代码写法
+
+```bash
 flutter pub add flutter_riverpod
 flutter pub add riverpod_annotation
 flutter pub add dev:riverpod_generator
 flutter pub add dev:build_runner
-# 需要在analysis_options.yaml 添加
+```
+
+**analysis\_options\.yaml 配置**
+
+```yaml
 plugins:
-  riverpod_lint: <latest version from https://pub.dev/packages/riverpod_lint>
-build_runner ：dart run build_runner watch -d
-# 网络请求 dio https://github.com/cfug/dio/blob/main/dio/README-ZH.md
+  riverpod_lint: ^latest
+```
+
+**代码生成监听命令**
+
+```bash
+dart run build_runner watch -d
+```
+
+### 2\. 网络请求 Dio
+
+```bash
 flutter pub add dio
-# json解析 freezed  https://github.com/rrousselGit/freezed/blob/master/resources/translations/zh_CN/README.md
+```
+
+### 3\. 数据模型 Freezed（JSON 序列化）
+
+```bash
 flutter pub add freezed_annotation
 flutter pub add dev:build_runner
 flutter pub add dev:freezed
-# 如果你要使用 freezed 来生成 fromJson/toJson，则执行：
 flutter pub add json_annotation
 flutter pub add dev:json_serializable
-# 路由导航使用 go_router https://pub.dev/packages/go_router/example
+```
+
+### 4\. 路由管理 GoRouter
+
+```bash
 flutter pub add go_router
-# 本地缓存 https://pub.dev/packages/shared_preferences/example
+```
+
+### 5\. 基础工具库
+
+```bash
+# 本地普通缓存
 flutter pub add shared_preferences
-# flutter_gen_runner
+
+# 资源自动生成
 flutter pub add dev:flutter_gen_runner
-# fpdart 错误处理：Either<L, R>  /  空安全增强：Option<T>
+
+# 函数式异常处理 Either/Option
 flutter pub add fpdart
-# Equatable  能够在Dart中比较物体通常需要覆盖==操作员和hashCode
+
+# 对象等值比较
 flutter pub add equatable
-┌─────────────────────────────────────────────┐
-│ import 'package:equatable/equatable.dart';  │
-│ class Person extends Equatable {            │
-│   const Person(this.name);                  │
-│   final String name;                        │
-│   @override                                 │
-│   List<Object> get props => [name];         │
-│ }                                           │
-└─────────────────────────────────────────────┘
-# flutter_secure_storage 安全数据存储 为 iOS/macOS 使用钥匙链，为 Android 提供可选的生物识别认证的自定义安全密码，以及针对 Windows、Linux 和 Web 的平台特定安全机制。
+
+# 安全加密存储
 flutter pub add flutter_secure_storage
-# connectivity_plus 该插件允许Flutter应用发现可用的网络连接类型。
+
+# 网络状态监听
 flutter pub add connectivity_plus
-# package_info_plus 你可以使用 PackageInfo 查询应用程序包的相关信息，该功能在 iOS 和 Android 平台均可使用
+
+# 应用版本信息
 flutter pub add package_info_plus
-# url_launcher 启动外部链接
+
+# 外部链接跳转
 flutter pub add url_launcher
+```
 
+---
 
+## 💡 Equatable 使用示例
 
+自动重写 == 和 hashCode，无需手动覆写
 
-# 结构图如下
+```dart
+import 'package:equatable/equatable.dart';
+
+class Person extends Equatable {
+  const Person(this.name);
+
+  final String name;
+
+  @override
+  List<Object> get props => [name];
+}
+```
+
+---
+
+## 📂 标准 CleanArchitecture 目录结构
+
+严格分层：数据层 / 领域层 / 展示层，解耦彻底，适合大型项目迭代
+
+```plain
 features/
-└── auth/                       # 认证模块
-    ├── data/                   # 数据层：负责获取数据
-    │   ├── datasources/        # 数据源（RemoteDataSource, LocalDataSource）//去外部拿数据，然后把它解析成 Data 层的 Model
-    │   ├── models/             # 数据模型（DTOs，与 JSON 直接映射）
-    │   └── repositories/       # Repository 的具体实现（RepositoryImpl）// 调用 DataSource 拿到 Model，然后将其“翻译”成 Domain 层的 Entity，最后交给 UseCase
+└── auth/                       # 业务模块（可无限扩展其他模块）
+    ├── data/                   # 数据层：负责数据获取、解析、存储
+    │   ├── datasources/        # 远程/本地数据源（请求接口、读取本地）
+    │   ├── models/             # DTO 数据模型（与 JSON 一一映射）
+    │   └── repositories/       # Repository 仓库具体实现
     │
-    ├── domain/                 # 领域层：核心业务规则（纯 Dart 代码）
-    │   ├── entities/           # 业务实体（如 User, Product）
-    │   ├── repositories/       # Repository 的抽象接口（Abstract Class）
-    │   └── usecases/           # 用例（如 LoginUseCase, GetUserUseCase）
+    ├── domain/                 # 领域层：核心纯业务逻辑（无 UI、无框架依赖）
+    │   ├── entities/           # 核心业务实体
+    │   ├── repositories/       # Repository 抽象接口
+    │   └── usecases/           # 业务用例（单一职责）
     │
-    └── presentation/           # 展示层：UI 与状态
-        ├── controllers/        # ViewModel / Notifier（处理状态逻辑）
-        ├── pages/              # 页面级 Widget
-        └── widgets/            # 模块内专属的自定义组件
+    └── presentation/           # 展示层：UI 页面 + 状态管理
+        ├── controllers/        # Riverpod ViewModel / Notifier
+        ├── pages/              # 页面主体
+        └── widgets/            # 模块内私有组件
+```
+
+---
+
+## 🚀 项目启动
+
+```bash
+flutter pub get
+flutter run
+```
+
+---
+
+## 📄 License
+
+MIT License
+
+Free to use for personal and commercial projects\.
