@@ -2,7 +2,7 @@
 
 # flutter\_riverpod\_ca
 
-🔥 **Flutter 企业级模板 \| CleanArchitecture \+ MVVM \+ Riverpod \+ Dio**
+🔥 **Flutter  \| CleanArchitecture \+ MVVM \+ Riverpod \+ Dio**
 
 一套完整、规范、可直接上线的 Flutter 新项目架构模板，严格遵循 Clean Architecture 分层架构，搭配 Riverpod 最新代码生成状态管理，统一项目规范，告别混乱代码。
 
