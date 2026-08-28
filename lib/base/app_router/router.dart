@@ -26,26 +26,29 @@ class FakeHomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authViewModelProvider);
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('isLogin: ${authState.isLogin}'),
-            InkWell(
-              borderRadius: BorderRadius.circular(8.0),
-              onTap: () {
-                ref.read(appVersionViewModelProvider.notifier).checkForUpdates();
-              },
-              child: const Text('Check for updates'),
-            ),
-            InkWell(
-              borderRadius: BorderRadius.circular(8.0),
-              onTap: () {
-                ref.read(authViewModelProvider.notifier).logout();
-              },
-              child: const Text('logout'),
-            ),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('isLogin: ${authState.user}'),
+              InkWell(
+                borderRadius: BorderRadius.circular(8.0),
+                onTap: () {
+                  ref.read(appVersionViewModelProvider.notifier).checkForUpdates();
+                },
+                child: const Text('Check for updates'),
+              ),
+              InkWell(
+                borderRadius: BorderRadius.circular(8.0),
+                onTap: () {
+                  ref.read(authViewModelProvider.notifier).logout();
+                },
+                child: const Text('logout'),
+              ),
+            ],
+          ),
         ),
       ),
     );
