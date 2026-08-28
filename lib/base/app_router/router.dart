@@ -24,11 +24,13 @@ class FakeHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authViewModelProvider);
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text('isLogin: ${authState.isLogin}'),
             InkWell(
               borderRadius: BorderRadius.circular(8.0),
               onTap: () {
