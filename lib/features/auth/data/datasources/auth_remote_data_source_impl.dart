@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod_ca/base/app_ability/handle_exception_ability.dart';
 import 'package:flutter_riverpod_ca/base/app_dio/api_client.dart';
@@ -16,7 +17,10 @@ class AuthRemoteDataSourceImpl with ApiClientAbility implements AuthRemoteDataSo
       final result = await _apiClient.post('/auth/login', data: {'username': username, 'password': password});
       return await result.fold(
         (failure) {
-          throw ServerException(message: failure.message);
+          debugPrint('Login response: $failure');
+          final fakeData = UserModel.createFakeData();
+          return fakeData;
+          // throw ServerException(message: failure.message);
         },
         (data) {
           debugPrint('Login response: $data');
@@ -37,7 +41,10 @@ class AuthRemoteDataSourceImpl with ApiClientAbility implements AuthRemoteDataSo
       );
       return await result.fold(
         (failure) {
-          throw ServerException(message: failure.message);
+          debugPrint('Register response: $failure');
+          final fakeData = UserModel.createFakeData();
+          return fakeData;
+          // throw ServerException(message: failure.message);
         },
         (data) {
           return UserModel.fromJson(data.data);

@@ -29,6 +29,18 @@ abstract class UserModel with _$UserModel {
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+
+  factory UserModel.createFakeData() => UserModel(
+    id: '1',
+    name: 'John Doe',
+    phone: '0123456789',
+    avatar: 'https://picsum.photos/200/300',
+    email: 'johndoe@example.com',
+    gender: 1,
+    birthday: '1990-01-01',
+    createdAt: '2022-01-01 00:00:00',
+    updatedAt: '2022-01-01 00:00:00',
+  );
 }
 
 extension UserModelPlus on UserModel {

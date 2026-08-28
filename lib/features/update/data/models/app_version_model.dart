@@ -25,6 +25,14 @@ abstract class AppVersionModel with _$AppVersionModel {
   }) = _AppVersionModel;
 
   factory AppVersionModel.fromJson(Map<String, dynamic> json) => _$AppVersionModelFromJson(json);
+
+  factory AppVersionModel.createFakeData() => AppVersionModel(
+    versionCode: '200',
+    versionName: '2.0.0',
+    updateContent: 'This is a fake app version',
+    downloadUrl: 'https://www.baidu.com',
+    updateLevel: 1,
+  );
 }
 
 extension AppVersionModelPlus on AppVersionModel {
