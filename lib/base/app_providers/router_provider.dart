@@ -30,7 +30,7 @@ GoRouter router(Ref ref) => GoRouter(
     debugPrint('isLoggedIn: $isLoggedIn, isGoingToLogin: $isGoingToLogin, isGoingToRegister: $isGoingToRegister');
     // If logged in and going to login, redirect to home
     if (isLoggedIn && (isGoingToLogin || isGoingToRegister)) {
-      return RoutesConstants.home;
+      return RoutesConstants.index;
     }
 
     return null; // No redirect

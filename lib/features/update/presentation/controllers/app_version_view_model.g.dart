@@ -42,7 +42,7 @@ final class AppVersionViewModelProvider
 }
 
 String _$appVersionViewModelHash() =>
-    r'435c9494fe4e9b01157c64579367f388a330903a';
+    r'0fdc5fc5f674046abc7d28019f9b4f9035356d73';
 
 abstract class _$AppVersionViewModel extends $Notifier<AppVersionState> {
   AppVersionState build();

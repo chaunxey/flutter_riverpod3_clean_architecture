@@ -23,7 +23,7 @@ class MyApp extends ConsumerWidget {
       routerConfig: router,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate, // 👈 必须包含这个
+        GlobalMaterialLocalizations.delegate, // 添加 Material 组件的 Internationalized localizations
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
