@@ -1,8 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod_ca/base/app_ability/handle_exception_ability.dart';
 import 'package:flutter_riverpod_ca/base/app_dio/api_client.dart';
-import 'package:flutter_riverpod_ca/base/app_error/exception.dart';
 import 'package:flutter_riverpod_ca/features/auth/data/models/user_model.dart';
 import 'package:flutter_riverpod_ca/features/auth/data/datasources/auth_remote_data_source_interface.dart';
 
